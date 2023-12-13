@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIN & MAX Leaderboard</title>
+  <style>
+    /* Add your CSS styling here */
+    /* You can style the leaderboard, score box, buttons, etc. */
+  </style>
+</head>
+<body>
+
+<div>
+  <h1>MIN & MAX Leaderboard</h1>
+  <div>
+    <label>MIN:</label>
+    <span id="minScore">-</span>
+  </div>
+  <div>
+    <label>MAX:</label>
+    <span id="maxScore">-</span>
+  </div>
+  <div>
+    <label>SCORE:</label>
+    <input type="text" id="scoreBox" readonly>
+  </div>
+  <div>
+    <button onclick="addToScore(1)">1</button>
+    <button onclick="addToScore(2)">2</button>
+    <button onclick="addToScore(3)">3</button>
+    <!-- Add more buttons for numbers 4-9 as needed -->
+    <button onclick="enterScore()">ENTER</button>
+  </div>
+</div>
+
+<script>
+  let currentScore = "";
+
+  function addToScore(number) {
+    // Add the clicked number to the current score
+    currentScore += number;
+    document.getElementById("scoreBox").value = currentScore;
+  }
+
+  function enterScore() {
+    // Get the current MIN and MAX scores
+    let minScore = parseInt(document.getElementById("minScore").innerText) || Infinity;
+    let maxScore = parseInt(document.getElementById("maxScore").innerText) || -Infinity;
+
+    // Get the current entered score
+    let enteredScore = parseInt(currentScore) || 0;
+
+    // Compare and update MIN and MAX scores
+    if (enteredScore < minScore) {
+      minScore = enteredScore;
+      document.getElementById("minScore").innerText = minScore;
+    }
+
+    if (enteredScore > maxScore) {
+      maxScore = enteredScore;
+      document.getElementById("maxScore").innerText = maxScore;
+    }
+
+    // Reset the SCORE box
+    currentScore = "";
+    document.getElementById("scoreBox").value = "";
+  }
+</script>
+
+</body>
+</html>
